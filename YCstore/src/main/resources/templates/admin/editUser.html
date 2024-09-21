@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit User</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h2 class="mt-4">Edit User</h2>
+
+    <div th:if="${message}" class="alert alert-success" th:text="${message}"></div>
+    <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+
+    <form th:action="@{/admin/updateUser/{id}(id=${user.id})}" method="post">
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" class="form-control" th:value="${user.username}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" class="form-control" th:value="${user.email}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="role">Role:</label>
+            <select id="role" name="role" class="form-control" required>
+                <option value="USER" th:selected="${user.role == 'USER'}">User</option>
+                <option value="ADMIN" th:selected="${user.role == 'ADMIN'}">Admin</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update User</button>
+        <a href="/admin/manageUsers" class="btn btn-secondary">Back to Users</a>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

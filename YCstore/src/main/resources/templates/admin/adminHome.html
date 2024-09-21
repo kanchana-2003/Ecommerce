@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Home</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .card-stat {
+            text-align: center;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Admin Dashboard</a>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/admin/manageProducts}">Manage Products</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/categories}">Manage Categories</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/admin/manageUsers}">Manage Users</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/admin/settings}">Settings</a>
+            </li>
+        </ul>
+        <a class="btn btn-danger my-2 my-sm-0" th:href="@{/logout}">Logout</a>
+    </div>
+</nav>
+<div th:if="${message}" class="alert alert-success" th:text="${message}"></div>
+<div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+
+<div class="container mt-4">
+    <h2 class="text-center">Welcome to the Admin Dashboard</h2>
+
+    <div class="row mt-4">
+        <div class="col-md-3">
+            <div class="card card-stat">
+                <div class="card-body">
+                    <h5 class="card-title">Total Products</h5>
+                    <p class="card-text">120</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card card-stat">
+                <div class="card-body">
+                    <h5 class="card-title">Total Customers</h5>
+                    <p class="card-text">250</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card card-stat">
+                <div class="card-body">
+                    <h5 class="card-title">Total Orders</h5>
+                    <p class="card-text">75</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card card-stat">
+                <div class="card-body">
+                    <h5 class="card-title">Total Revenue</h5>
+                    <p class="card-text">$3,500</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mt-4">
+        <div class="card-body">
+            <h5 class="card-title">Quick Actions</h5>
+            <div class="row">
+                <div class="col-md-4">
+                    <a class="btn btn-primary btn-block" th:href="@{/admin/addProduct}">Add Product</a>
+                </div>
+                <div class="col-md-4">
+                    <a class="btn btn-secondary btn-block" th:href="@{/categories}">Add Category</a>
+                </div>
+                <div class="col-md-4">
+                    <a class="btn btn-info btn-block" th:href="@{/admin/manageUsers}">View Users</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
