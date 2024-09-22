@@ -5,25 +5,25 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
-            background-color: #f0f8ff; /* Softer light blue background */
+            background-color: #f5f5f5; /* Light background */
         }
         .header {
             background-color: #ffffff; /* White background for header */
-            padding: 15px 30px; /* More padding for a cleaner look */
+            padding: 15px 30px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for header */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
         }
         .header img {
-            height: 60px; /* Larger logo */
+            height: 60px;
         }
         .header .search-bar {
-            max-width: 600px; /* Reasonable max width */
+            max-width: 600px;
             width: 100%;
             margin: 0 20px;
-            border-radius: 30px; /* Smooth round corners */
-            padding: 10px; /* Add padding inside input */
+            border-radius: 30px;
+            padding: 10px;
         }
         .header .nav-links {
             display: flex;
@@ -35,63 +35,49 @@
             color: #007bff;
         }
         .product-card {
+            text-decoration:none;
             border: none;
             border-radius: 10px;
             overflow: hidden;
             transition: transform 0.3s, box-shadow 0.3s;
-            background-color: #fff; /* White background for card */
+            background-color: #fff;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-            margin-bottom: 20px; /* Space between cards */
+            text-align: center; /* Center text */
+            margin-bottom: 30px;
+            padding: 20px;
         }
         .product-card:hover {
-            transform: translateY(-10px); /* Slight lift effect */
+            transform: translateY(-10px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* Deeper shadow on hover */
         }
         .product-image {
             width: 100%;
-            height: 250px;
-            object-fit: cover;
-        }
-        .card-body {
-            padding: 20px;
-            text-align: center;
+            height: 250px; /* Fixed height for image */
+            object-fit: cover; /* Ensures proper image scaling */
+            border-radius: 10px; /* Rounded corners */
+            margin-bottom: 15px;
         }
         .card-title {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             font-weight: bold;
             color: #333;
+            margin-bottom: 10px; /* Space below title */
         }
         .price {
             font-size: 1.25rem;
             font-weight: bold;
             color: #28a745; /* Green for price */
-            margin-bottom: 15px;
-        }
-        .card-text {
-            font-size: 1rem;
-            color: #666;
-            margin-bottom: 20px;
-        }
-        .btn-custom {
-            background-color: #007bff;
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 30px;
-            transition: background-color 0.3s;
-        }
-        .btn-custom:hover {
-            background-color: #0056b3;
-            color: #fff;
         }
     </style>
 </head>
 <body>
 <!-- Header Section -->
 <div class="header">
-    <img src="/images/yc_store_logo.jpg" alt="Logo" />
-    <input type="text" class="form-control search-bar" placeholder="Search products..." />
+    <a th:href="@{/userHome}">
+        <img src="/images/yc_store_logo.jpg" alt="Logo" />
+    </a>    <input type="text" class="form-control search-bar" placeholder="Search products..." />
     <div class="nav-links">
-        <a th:href="@{/profile}" class="btn btn-link">Profile</a>
+        <a th:href="@{/userProfile}" class="btn btn-link">Profile</a>
         <a th:href="@{/cart}" class="btn btn-link">Cart</a>
     </div>
 </div>
@@ -101,15 +87,11 @@
     <h2 class="text-center mb-4">Manage Products</h2>
     <div class="row">
         <div th:each="product : ${products}" class="col-md-4 col-sm-6 mb-4">
-            <a th:href="@{/productDetail(id=${product.id})}" class="product-card card">
+            <a th:href="@{/productDetail(id=${product.id})}" class="product-card">
                 <img th:src="'data:image/jpeg;base64,' + ${product.imageBase64}"
-                     alt="Product Image" class="product-image" />
-                <div class="card-body">
-                    <h5 class="card-title" th:text="${product.name}"></h5>
-                    <p class="price" th:text="'$' + ${product.price}"></p>
-                    <p class="card-text" th:text="${product.description}"></p>
-                    <a href="#" class="btn btn-custom">View Details</a>
-                </div>
+                     alt="Product Image" class="product-image img-fluid" />
+                <h5 class="card-title" th:text="${product.name}"></h5>
+                <p class="price" th:text="'$' + ${product.price}"></p>
             </a>
         </div>
     </div>

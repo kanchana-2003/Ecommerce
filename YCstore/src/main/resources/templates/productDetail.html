@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Product Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f9f9f9;
+        }
+        .header {
+            background-color: #ffffff;
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .header img {
+            height: 60px;
+        }
+        .header .search-bar {
+            max-width: 600px;
+            width: 100%;
+            margin: 0 20px;
+            border-radius: 30px;
+            padding: 10px;
+        }
+        .header .nav-links {
+            display: flex;
+            align-items: center;
+        }
+        .header .nav-links a {
+            margin-left: 20px;
+            font-weight: bold;
+            color: #007bff;
+        }
+        .product-details {
+            display: flex;
+            margin-top: 40px;
+            margin-bottom: 60px;
+            background-color: #fff;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .product-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .image-section {
+            flex: 1;
+            margin-right: 40px;
+        }
+        .details-section {
+            flex: 1;
+            text-align: center;
+        }
+        .product-category {
+            font-size: 1rem;
+            color: #888;
+            margin-bottom: 10px;
+        }
+        .product-name {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .product-description {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 20px;
+        }
+        .product-price {
+            font-size: 1.5rem;
+            color: #28a745;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+        .action-buttons {
+            margin-top: 20px;
+        }
+        .action-buttons .btn {
+            width: 200px;
+            font-size: 1.1rem;
+            padding: 10px 20px;
+            margin: 10px;
+        }
+        .btn-add-to-cart {
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 30px;
+        }
+        .btn-buy-now {
+            background-color: #28a745;
+            color: #fff;
+            border-radius: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header Section -->
+<div class="header">
+    <a th:href="@{/userHome}">
+    <img src="/images/yc_store_logo.jpg" alt="Logo" />
+    </a>
+    <input type="text" class="form-control search-bar" placeholder="Search products..." />
+    <div class="nav-links">
+        <a th:href="@{/userProfile}" class="btn btn-link">Profile</a>
+        <a th:href="@{/cart}" class="btn btn-link">Cart</a>
+    </div>
+</div>
+
+<!-- Product Detail Section -->
+<div class="container mt-5">
+    <div class="product-details">
+        <!-- Left side: Product Images -->
+        <div class="image-section">
+            <img th:src="'data:image/jpeg;base64,' + ${product.imageBase64}"
+                 alt="Product Image" class="product-image img-fluid" />
+        </div>
+
+        <!-- Right side: Product Details -->
+        <div class="details-section">
+            <p class="product-category" th:text="${product.category}"></p>
+            <h2 class="product-name" th:text="${product.name}"></h2>
+            <p class="product-description" th:text="${product.description}"></p>
+            <p class="product-price" th:text="'$' + ${product.price}"></p>
+
+            <!-- Buttons below the image -->
+            <div class="action-buttons">
+                <form th:action="@{/addToCart}" method="post">
+                    <input type="hidden" th:name="productId" th:value="${product.id}" />
+                    <button type="submit" class="btn btn-add-to-cart">Add to Cart</button>
+                </form>
+                <button class="btn btn-buy-now">Buy Now</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

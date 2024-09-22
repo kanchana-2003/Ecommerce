@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
@@ -63,6 +64,14 @@ public class UserController {
             product.setImageBase64(base64Image);
         }
         return "user/userHome";
+    }
+
+    @GetMapping("/userProfile")
+    public String showUserProfile(Model model, Principal principal) {
+        String email = principal.getName();
+        User user = userService.getUserByEmail(email).get();
+        model.addAttribute("user", user);
+        return "user/profile";
     }
 
     @GetMapping("/admin/manageUsers")
@@ -116,6 +125,15 @@ public class UserController {
     public String deleteUser(@PathVariable Long id) {
         userService.deleteUserById(id);
         return "redirect:/admin/manageUsers";
+    }
+
+    @GetMapping("/productDetail")
+    public String showProductDetails(@RequestParam("id") Long id, Model model) {
+        Product product = productService.getProductById(id).get();
+        String base64Image = Base64.getEncoder().encodeToString(product.getImage());
+        product.setImageBase64(base64Image);
+        model.addAttribute("product", product);
+        return "productDetail";
     }
 
 

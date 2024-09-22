@@ -2,23 +2,45 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #e0f7fa;
+        }
+        .login-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+    </style>
 </head>
 <body>
-<h2>Login</h2>
-<form th:action="@{/login}" method="post">
-    <div>
-        <label>Email:</label>
-        <input type="email" name="username" required />
-    </div>
-    <div>
-        <label>Password:</label>
-        <input type="password" name="password" required />
-    </div>
-    <div>
-        <button type="submit">Login</button>
-    </div>
-</form>
+<div class="login-container">
+    <h2 class="text-center">Login</h2>
+    <form th:action="@{/login}" method="post">
+        <div class="form-group">
+            <label>Email:</label>
+            <input type="email" name="username" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label>Password:</label>
+            <input type="password" name="password" class="form-control" required />
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary btn-block">Login</button>
+        </div>
+    </form>
+    <p class="text-center mt-3">Don't have an account? <a th:href="@{/register}">Register here</a></p>
+</div>
 
-<p>Don't have an account? <a th:href="@{/register}">Register here</a></p>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
