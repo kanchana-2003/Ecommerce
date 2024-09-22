@@ -1,7 +1,9 @@
 package com.example.YCstore.controller;
 
+import com.example.YCstore.model.Product;
 import com.example.YCstore.model.Role;
 import com.example.YCstore.model.User;
+import com.example.YCstore.service.ProductService;
 import com.example.YCstore.service.UserService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +22,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private ProductService productService;
 
     @GetMapping("/register")
     public String showRegisterForm(Model model) {
@@ -49,7 +55,13 @@ public class UserController {
     }
 
     @GetMapping("/userHome")
-    public String userHome() {
+    public String userHome(Model model) {
+        List<Product> products = productService.getAllProducts();
+        model.addAttribute("products", products);
+        for (Product product : products) {
+            String base64Image = Base64.getEncoder().encodeToString(product.getImage());
+            product.setImageBase64(base64Image);
+        }
         return "user/userHome";
     }
 
